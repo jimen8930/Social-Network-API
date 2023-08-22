@@ -68,8 +68,26 @@ async addFriend(req, res) {
         console.log(err);
         return res.status(500).json(err);
       }
-}
+},
 
-
+async deleteFriend(req, res) {
+    try {
+        const friendDeleted= await User.findOneAndDelete(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+        );
+        if (!friendDeleted) {
+            return res.status(404).json({ message: "No user with that ID" });
+        }
+        return res.status(200).json(friendDeleted);
+    } catch (error) {
+        console.log(err);
+        return res.status(500).json(err); 
+    }
+},
 };
+
+// Exports
+module.exports = userController;
 
