@@ -88,6 +88,4 @@ async deleteFriend(req, res) {
 },
 };
 
-// Exports
-module.exports = userController;
 
