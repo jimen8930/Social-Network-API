@@ -33,11 +33,11 @@ const userSchema = new Schema ({
         id: false,
       }
     );
-    
+    // A virtual property for the friend count and a getter for the virtual that will return the length of thr friend count
     userSchema.virtual("friendCount").get(function () {
         return this.friends.length;
 });
-
+// Initialize the user model
 const User = model("user", userSchema);
-
+// Exports
 module.exports = User;
