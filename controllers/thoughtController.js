@@ -100,7 +100,7 @@ async deleteThought(req, res) {
       res.status(500).json(err);
     }
   },
-  async removeReaction(req, res) {
+  async deleteReaction (req, res) {
     try {
       const thought = await Reaction.findOneAndUpdate(
         { _id: req.params.thoughtId },
