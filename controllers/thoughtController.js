@@ -11,7 +11,7 @@ module.exports = {
         }
     },
     // Get a single thought
-    async getThought(req, res) {
+    async getSingleThought(req, res) {
         try {
             const thought = await Thought.findOne({_id: req.params.thoughtId})
             if (!thought) {
@@ -42,7 +42,7 @@ async createThought(req, res) {
 },
 
   // Update a thought
-  async updateThoought(req, res) {
+  async updateThought(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
