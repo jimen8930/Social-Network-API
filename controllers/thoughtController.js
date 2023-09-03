@@ -1,10 +1,10 @@
-const { Thoughts, User } = require('../models');
+const { Thought, User } = require('../models');
 
 module.exports = {
     // Get all thoughts
     async getThoughts(req, res) {
         try {
-            const thoughts = await Thoughts.find();
+            const thoughts = await Thought.find();
             res.json(thoughts);
         } catch (err) {
             res.status(500).json(err)
@@ -34,6 +34,7 @@ async createThought(req, res) {
           if (!user) {
             return res.status(404).json({message: 'No user with this id!'})
           }
+          res.json("Thought added!")
       } catch (err) {
         console.log(err);
         return res.status(500).json(err);
@@ -62,7 +63,7 @@ async createThought(req, res) {
   // Delete a thought
 async deleteThought(req, res) {
     try {
-      const thought= await Course.findOneAndDelete({ _id: req.params.thouhgtId });
+      const thought= await Thought.findOneAndDelete({ _id: req.params.thouhgtId });
 
       if (!thought) {
         res.status(404).json({ message: 'No thought with that ID' });
@@ -102,7 +103,7 @@ async deleteThought(req, res) {
   },
   async deleteReaction (req, res) {
     try {
-      const thought = await Reaction.findOneAndUpdate(
+      const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
         { $pull: { reaction: { reactionId: req.params.reactionId } } },
         { runValidators: true, new: true }
