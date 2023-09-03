@@ -49,6 +49,14 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+  async updateUser (req, res){
+    try{
+        const dbUserData = await User.findOneAndUpdate({ _id: req.params.userId },{ $set: req.body },{ runValidators: true, new: true })
+        res.json(dbUserData)
+    }catch(err){
+        res.status(500).json(err)
+    }
+  },
 
   // Add a friend
 async addFriend(req, res) {
@@ -70,7 +78,7 @@ async addFriend(req, res) {
       }
 },
 
-async deleteFriend(req, res) {
+async removeFriend(req, res) {
     try {
         const friendDeleted= await User.findOneAndDelete(
             { _id: req.params.userId },
